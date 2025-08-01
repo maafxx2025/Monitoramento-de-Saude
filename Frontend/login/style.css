@@ -1,2 +1,17 @@
 /* Página CSS da tela de Login do aplicativo
 Coloque o CSS aqui do Login */
+body {
+    font-family: 'Roboto', sans-serif;
+    min-height: max(884px, 100dvh);
+}
+.custom-blue {
+    background-color: #2F59A3;
+}
+
+.custom-text-blue {
+    color: #2F59A3;
+}
+
+.custom-border-blue {
+    border-color: #2F59A3;
+}

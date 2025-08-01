@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Cadastro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <div class="container mx-auto max-w-sm px-4 py-8 flex flex-col flex-1">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-6">
+            <button>
+                <span class="material-icons">arrow_back</span>
+            </button>
+            <h1 class="text-2xl font-bold">Cadastro</h1>
+            <button>
+                <span class="material-icons">more_vert</span>
+            </button>
+        </header>
+
+        <!-- Main content: stretch to fill vertical space -->
+        <main class="flex flex-col justify-between flex-1">
+            <!-- Form Inputs -->
+            <div class="space-y-4">
+                <div class="bg-white border border-gray-200 rounded-lg p-4">
+                    <label class="text-gray-600 block" for="nome">Nome</label>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-4">
+                    <label class="text-gray-600 block" for="email">E-mail</label>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-4">
+                    <label class="text-gray-600 block" for="senha">Senha</label>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-4">
+                    <label class="text-gray-600 block" for="data-nascimento">Data de nascimento</label>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-4 flex justify-between items-center">
+                    <label class="text-gray-600" for="telefone-emergencia">Telefone de emergência</label>
+                    <span class="material-icons text-gray-400">chevron_right</span>
+                </div>
+            </div>
+
+            <!-- Button at the bottom -->
+            <div class="mt-8">
+                <button class="w-full bg-blue-800 text-white font-bold py-4 rounded-lg">
+                    Cadastrar
+                </button>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
