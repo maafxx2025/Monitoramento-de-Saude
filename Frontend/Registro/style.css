@@ -1,0 +1,31 @@
+:root {
+    --brand-blue: #3264A6;
+    --brand-white: #FFFFFF;
+    --brand-black: #000000;
+    --light-gray: #F0F4F8;
+    --medium-gray: #D1D5DB;
+    --dark-gray: #6B7280;
+}
+
+body {
+    font-family: 'Public Sans', sans-serif;
+}
+
+/* Alinha verticalmente o campo de busca */
+.choices__inner {
+  display: flex;
+  flex-direction: column-reverse;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  min-height: 3rem;
+  padding: 0.5rem;
+  gap: 0.25rem;
+  border-radius: 0.5rem;
+}
+
+/* Mantém os itens "tags" arrumados abaixo do input */
+.choices__list--multiple {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Registro de Paciente</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Choices.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <style type="text/tailwindcss">
+        .form-input {
+            @apply w-full rounded-lg border-2 border-[var(--medium-gray)] bg-[var(--brand-white)] p-4 text-base text-[var(--brand-black)] placeholder-[var(--dark-gray)] focus:border-[var(--brand-blue)] focus:ring-[var(--brand-blue)];
+        }
+        .form-label {
+            @apply mb-2 block text-base font-medium text-[var(--brand-black)];
+        }
+        .btn-primary {
+            @apply w-full rounded-lg bg-[var(--brand-blue)] py-4 px-5 text-center text-lg font-bold text-[var(--brand-white)] transition-colors hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+        }
+        .form-section {
+            @apply mb-8;
+        }
+        .section-title {
+            @apply mb-6 border-b-2 border-[var(--light-gray)] pb-2 text-xl font-bold text-[var(--brand-blue)];
+        }
+    </style>
+</head>
+
+<body class="bg-[var(--light-gray)]">
+    <div class="container mx-auto max-w-2xl px-4 py-8">
+        <header class="mb-8 text-center">
+            <h1 class="text-4xl font-bold text-[var(--brand-blue)]">Vamos começar a te conhecer melhor!</h1>
+            <p class="mt-2 text-lg text-[var(--dark-gray)]">Nome do Usuário</p>
+        </header>
+        <main class="rounded-xl bg-[var(--brand-white)] p-6 shadow-lg md:p-10">
+            <form action="#" method="POST">
+                <div class="form-section">
+                    <div class="grid grid-cols-1 gap-6">
+                        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                            <div>
+                                <label class="form-label" for="dob">Data de Nascimento</label>
+                                <input class="form-input" id="dob" name="dob" required="" type="date" />
+                            </div>
+                            <div>
+                                <label class="form-label" for="gender">Gênero</label>
+                                <select class="form-input" id="gender" name="gender" required="">
+                                    <option disabled="" selected="" value="">Selecione o gênero</option>
+                                    <option value="male">Masculino</option>
+                                    <option value="female">Feminino</option>
+                                    <option value="other">Outro</option>
+                                    <option value="prefer_not_to_say">Prefiro não informar</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="grid grid-cols-1 gap-6">
+                        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                            <div>
+                                <label class="form-label" for="weight">Peso (kg)</label>
+                                <input class="form-input" id="weight" name="weight" placeholder="ex.: 70" required=""
+                                    type="number" />
+                            </div>
+                            <div>
+                                <label class="form-label" for="height">Altura (cm)</label>
+                                <input class="form-input" id="height" name="height" placeholder="ex.: 175"
+                                    type="number" />
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-label" for="chronic-conditions">Quais doenças crônicas você
+                                possui?</label>
+                            <p class="mt-1 text-sm text-[var(--dark-gray)]">Selecione todas que se aplicam:</p>
+                            <select class="form-input" id="chronic-conditions" name="chronic-conditions[]" multiple
+                                required>
+                                <option value="hipertensao">Hipertensão</option>
+                                <option value="diabetes">Diabetes</option>
+                                <option value="colesterol_alto">Colesterol Alto</option>
+                                <option value="asma">Asma</option>
+                                <option value="doenca_cardiaca">Doença Cardíaca</option>
+                                <option value="artrite">Artrite</option>
+                                <option value="depressao">Depressão</option>
+                                <option value="ansiedade">Ansiedade</option>
+                                <option value="obesidade">Obesidade</option>
+                                <option value="doenca_renal_cronica">Doença Renal Crônica</option>
+                                <option value="cancer">Câncer</option>
+                                <option value="osteoporose">Osteoporose</option>
+                                <option value="problemas_respiratorios">Doenças Respiratórias Crônicas</option>
+                                <option value="alzheimer">Alzheimer</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-10">
+                    <button class="btn-primary" type="submit">Continuar</button>
+                </div>
+            </form>
+        </main>
+    </div>
+    <!-- Choices.js JS -->
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
