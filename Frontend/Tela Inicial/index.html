@@ -46,8 +46,9 @@
                 Lembrete de Medicação
             </h3>
 
-            <section class="mb-6 rounded-2xl bg-white border border-gray-200 p-4 shadow-md">
-                <div class="flex items-center justify-between gap-4">
+            <section class="mb-6">
+                <div
+                    class="flex items-center justify-between gap-4 mb-4 rounded-2xl bg-white border border-gray-200 p-4 shadow-md">
                     <div class="flex flex-col gap-1">
                         <p class="text-base font-bold text-[var(--primary-color)]">Metformina 500mg</p>
                         <p class="text-sm text-[var(--dark-gray)]">Tomar às 08:00</p>
@@ -58,7 +59,19 @@
                         <span>Confirmar</span>
                     </button>
                 </div>
+
+                <!-- Botão de adicionar nova consulta -->
+                <button id="NewConsulta"
+                    class="w-full rounded-2xl p-4 border border-gray-200 shadow-sm flex items-center justify-center gap-2 text-white hover:bg-blue-700 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    <span>Adicionar Medicação</span>
+                </button>
             </section>
+
             <section class="mb-6">
                 <h2 class="mb-4 text-xl font-bold text-[var(--primary-color)]">Registro Rápido</h2>
                 <div class="grid grid-cols-2 gap-4">
@@ -256,37 +269,7 @@
             </nav>
         </div>
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const greetingElement = document.getElementById("greeting");
-
-            function updateGreeting() {
-                const hour = new Date().getHours();
-                let message = "";
-
-                if (hour >= 5 && hour < 12) {
-                    message = "Bom dia,";
-                } else if (hour >= 12 && hour < 18) {
-                    message = "Boa tarde,";
-                } else {
-                    message = "Boa noite,";
-                }
-
-                // Só atualiza se mudar, evitando re-render desnecessário
-                if (greetingElement.textContent !== message) {
-                    greetingElement.textContent = message;
-                }
-            }
-
-            // Atualiza imediatamente ao carregar
-            updateGreeting();
-
-            // Atualiza a cada 60 segundos
-            setInterval(updateGreeting, 60 * 2 * 1000);
-        });
-    </script>
-
+    <script src="script.js"></script>
 </body>
 
 </html>
