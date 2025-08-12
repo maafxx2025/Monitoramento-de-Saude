@@ -1,0 +1,18 @@
+:root {
+        --primary-color: #3264A6;
+        --secondary-color: #FFFFFF;
+        --light-gray: #F0F2F5;
+        --medium-gray: #B0B8C4;
+        --dark-gray: #5A6F8C;
+        --text-color: #101419;
+        --green-accent: #28A745;
+        --red-alert: #DC3545;
+}
+body {
+    font-family: 'Lexend', 'Noto Sans', sans-serif;
+    min-height: max(884px, 100dvh);
+}
+
+#NewConsulta{
+    background-color: var(--primary-color);
+}
