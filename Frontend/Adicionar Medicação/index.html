@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Adicionar Medicação</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <style type="text/tailwindcss"></style>
+</head>
+
+<body class="bg-white">
+    <div class="max-w-sm mx-auto min-h-screen flex flex-col">
+        <header class="header fixed top-0 left-0 right-0 max-w-sm mx-auto flex items-center justify-between p-4 z-10">
+            <a href="../Tela Inicial/index.html">
+                <button class="text-white">
+                    <span class="material-icons">arrow_back_ios_new</span>
+                </button>
+            </a>
+
+            <h1 class="text-xl font-bold">Adicionar Medicação</h1>
+            <div class="w-8"></div>
+        </header>
+        <main class="flex-grow pt-20 px-4 pb-4">
+            <form id="medication-form" class="space-y-6">
+                <div class="relative">
+                    <label class="form-label block text-sm font-medium mb-1" for="medication-name">Nome do
+                        medicamento</label>
+                    <div class="relative">
+                        <span
+                            class="material-icons absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">medication</span>
+                        <input class="form-input w-full" id="medication-name" name="medication-name"
+                            placeholder="Ex: Paracetamol" type="text" />
+                    </div>
+                </div>
+                <div class="grid grid-cols-5 gap-4">
+                    <div class="col-span-3">
+                        <label class="form-label block text-sm font-medium mb-1" for="quantity">Quantidade</label>
+                        <input class="form-input w-full" id="quantity" name="quantity" placeholder="Ex: 2"
+                            type="number" />
+                    </div>
+                    <div class="col-span-2">
+                        <label class="form-label block text-sm font-medium mb-1" for="unit">Unidade</label>
+                        <select class="form-input w-full appearance-none bg-white" id="unit" name="unit">
+                            <option>mg</option>
+                            <option>ml</option>
+                            <option selected="">comprido</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="relative">
+                    <label class="form-label block text-sm font-medium mb-1" for="time">Horário</label>
+                    <div class="relative">
+                        <span
+                            class="material-icons absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">schedule</span>
+                        <input class="form-input w-full" id="time" name="time" type="time" />
+                    </div>
+                </div>
+                <div>
+                    <label class="form-label block text-sm font-medium mb-1" for="description">Descrição
+                        (opcional)</label>
+                    <textarea class="form-input w-full" id="description" name="description"
+                        placeholder="Ex: Tomar com um copo de água." rows="4"></textarea>
+                </div>
+                <div class="fixed bottom-0 left-0 right-0 p-4 bg-white max-w-sm mx-auto">
+                    <button id="save-button"
+                        class="btn-primary w-full text-white font-bold py-4 px-4 rounded-lg text-lg shadow-lg hover:bg-blue-800 transition-colors duration-300"
+                        type="submit">
+                        Salvar Lembrete
+                    </button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <!-- Toast de sucesso -->
+    <div id="success-toast"
+        class="hidden fixed top-1/3 left-1/2 -translate-x-1/2 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg flex items-center gap-3 z-50 opacity-0 scale-95 transition-all duration-200"
+        role="status" aria-hidden="true" aria-live="polite">
+        <span class="material-icons">check_circle</span>
+        <span>Lembrete salvo!</span>
+    </div>
+
+    <!-- Toast de erro (campos obrigatórios) -->
+    <div id="error-toast"
+        class="hidden fixed top-1/3 left-1/2 -translate-x-1/2 bg-red-500 text-white px-6 py-4 rounded-lg shadow-lg flex items-center gap-3 z-50 opacity-0 scale-95 transition-all duration-200"
+        role="alert" aria-hidden="true" aria-live="assertive">
+        <span class="material-icons">error</span>
+        <span>Preencha todos os campos obrigatórios.</span>
+    </div>
+
+    <script src="script.js">
+    </script>
+</body>
+
+</html>

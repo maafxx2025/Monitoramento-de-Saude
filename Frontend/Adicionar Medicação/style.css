@@ -1,0 +1,38 @@
+:root {
+    --primary-color: #3264A6;
+    --white-color: #FFFFFF;
+    --gray-color: #5A6F8C;
+    --light-gray-border: #E0E0E0;
+    --background-color: #FFFFFF;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
+}
+
+.header {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.form-label {
+    color: var(--gray-color);
+}
+
+.form-input {
+    border: 1px solid var(--light-gray-border);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-size: 16px;
+}
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(50, 100, 166, 0.2);
+}
