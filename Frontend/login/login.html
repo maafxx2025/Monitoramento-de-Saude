@@ -23,16 +23,23 @@
                 <h1 class="text-3xl font-bold text-blue-800">VivaBem</h1>
             </div>
             <div class="space-y-4">
-                <input
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Email" type="email" />
-                <input
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Senha" type="password" />
-            </div>
-            <div class="mt-6 space-y-4">
-                <button
-                    class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-300">Entrar</button>
+                <form id="loginForm" action="/login" method="POST" class="space-y-4">
+                    <input name="email" required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Email" type="email" />
+
+                    <input name="password" required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Senha" type="password" />
+                    <div id="errorMessage"
+                        class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"></div>
+                    <div class="mt-6 space-y-4">
+                        <button type="submit"
+                            class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
+                            Entrar
+                        </button>
+                    </div>
+                </form>
                 <button
                     class="w-full bg-red-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-red-700 transition duration-300 flex items-center justify-center">
                     <svg class="w-5 h-5 mr-2" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
@@ -63,6 +70,84 @@
         </div>
     </div>
 
+    <script>
+        let errorTimeout; // Variável para controlar o timeout
+
+        // Função para mostrar mensagem de erro
+        function showError(message) {
+            const errorDiv = document.getElementById("errorMessage");
+            errorDiv.textContent = message;
+            errorDiv.classList.remove("hidden");
+
+            // Limpa timeout anterior se existir
+            if (errorTimeout) {
+                clearTimeout(errorTimeout);
+            }
+
+            // Define timeout para esconder a mensagem após 8 segundos
+            errorTimeout = setTimeout(() => {
+                hideError();
+            }, 8000);
+        }
+
+        // Função para esconder mensagem de erro
+        function hideError() {
+            const errorDiv = document.getElementById("errorMessage");
+            errorDiv.classList.add("hidden");
+            errorDiv.textContent = "";
+
+            // Limpa o timeout
+            if (errorTimeout) {
+                clearTimeout(errorTimeout);
+                errorTimeout = null;
+            }
+        }
+
+        // Esconde a mensagem de erro quando a página carrega
+        document.addEventListener("DOMContentLoaded", function () {
+            hideError();
+        });
+
+        // Esconde a mensagem quando o usuário começar a digitar nos campos
+        document.addEventListener("DOMContentLoaded", function () {
+            const emailInput = document.querySelector('input[name="email"]');
+            const passwordInput = document.querySelector('input[name="password"]');
+
+            [emailInput, passwordInput].forEach(input => {
+                input.addEventListener('input', hideError);
+                input.addEventListener('focus', hideError);
+            });
+        });
+
+        // Handler do formulário de login
+        document.getElementById("loginForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            // Esconde qualquer mensagem de erro anterior
+            hideError();
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            try {
+                const res = await fetch("/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await res.json();
+
+                if (!result.success) {
+                    showError(result.message);
+                } else {
+                    window.location.href = "/Registro/index.html";
+                }
+            } catch (error) {
+                showError("Erro de conexão. Tente novamente.");
+            }
+        });
+    </script>
 </body>
 
 </html>
