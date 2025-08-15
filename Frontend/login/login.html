@@ -71,20 +71,34 @@
     </div>
 
     <script>
-        let errorTimeout; // Variável para controlar o timeout
+        let errorTimeout;
+
+        // Função para traduzir mensagens de erro
+        function translateErrorMessage(originalMessage) {
+            const translations = {
+                "Invalid login credentials": "Email ou senha incorretos",
+                "Email not confirmed": "Email não confirmado",
+                "Too many requests": "Muitas tentativas. Tente novamente mais tarde",
+                "User not found": "Usuário não encontrado",
+                "Invalid email": "Email inválido",
+                "Password should be at least 6 characters": "A senha deve ter pelo menos 6 caracteres",
+                "Network error": "Erro de conexão. Verifique sua internet",
+            };
+
+            return translations[originalMessage] || "Erro ao fazer login. Tente novamente";
+        }
 
         // Função para mostrar mensagem de erro
         function showError(message) {
             const errorDiv = document.getElementById("errorMessage");
-            errorDiv.textContent = message;
+            const translatedMessage = translateErrorMessage(message);
+            errorDiv.textContent = translatedMessage;
             errorDiv.classList.remove("hidden");
 
-            // Limpa timeout anterior se existir
             if (errorTimeout) {
                 clearTimeout(errorTimeout);
             }
 
-            // Define timeout para esconder a mensagem após 8 segundos
             errorTimeout = setTimeout(() => {
                 hideError();
             }, 8000);
@@ -96,7 +110,6 @@
             errorDiv.classList.add("hidden");
             errorDiv.textContent = "";
 
-            // Limpa o timeout
             if (errorTimeout) {
                 clearTimeout(errorTimeout);
                 errorTimeout = null;
@@ -123,7 +136,6 @@
         document.getElementById("loginForm").addEventListener("submit", async function (e) {
             e.preventDefault();
 
-            // Esconde qualquer mensagem de erro anterior
             hideError();
 
             const formData = new FormData(this);
@@ -141,10 +153,10 @@
                 if (!result.success) {
                     showError(result.message);
                 } else {
-                    window.location.href = "/Registro/index.html";
+                    window.location.href = "/TelaInicial/index.html";
                 }
             } catch (error) {
-                showError("Erro de conexão. Tente novamente.");
+                showError("Network error");
             }
         });
     </script>
