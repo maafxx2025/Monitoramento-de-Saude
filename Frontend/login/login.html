@@ -142,7 +142,7 @@
             const data = Object.fromEntries(formData);
 
             try {
-                const res = await fetch("/login", {
+                const res = await fetch("/auth/login", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data)
@@ -153,7 +153,7 @@
                 if (!result.success) {
                     showError(result.message);
                 } else {
-                    window.location.href = "/TelaInicial/index.html";
+                    window.location.href = "/Registro/index.html";
                 }
             } catch (error) {
                 showError("Network error");
