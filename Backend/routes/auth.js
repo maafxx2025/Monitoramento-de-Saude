@@ -25,19 +25,6 @@ router.post("/signup", async (req, res) => {
 
     const user = data.user;
 
-    // 2 - IMPORTANTE: Configura a sessão para este cliente
-    // if (data.session) {
-    //     await supabase.auth.setSession({
-    //         access_token: data.session.access_token,
-    //         refresh_token: data.session.refresh_token
-    //     });
-    // }
-
-
-    // 3 - Salva dados extras na tabela profiles
-    // const { error: profileError } = await supabase
-    //     .from("profiles")
-    //     .insert([{ id: user.id, name, emergency_phone }]);
     const { error: profileError } = await supabaseAdmin
         .from("profiles")
         .insert([{ id: user.id, name, emergency_phone }]);
@@ -63,9 +50,27 @@ router.post("/login", async (req, res) => {
         return res.status(400).json({ success: false, message: error.message });
     }
 
+    // Pega o user_id
+    const user = data.user;
+
+    // 🔹 Busca o perfil do usuário na tabela profiles
+    const { data: profile, error: profileError } = await supabase
+        .from("profiles")
+        .select("dob, gender, weight, height, chronic_conditions")
+        .eq("id", user.id)
+        .single();
+
+    if (profileError) {
+        console.error("Erro ao buscar perfil:", profileError.message);
+        return res.status(500).json({ success: false, message: "Erro ao verificar perfil." });
+    }
+
+    // 🔹 Verifica se o perfil está incompleto
+    const needsProfile = !profile || !profile.dob || !profile.gender || !profile.weight || !profile.height || !profile.chronic_conditions;
+
     // Salva token no cookie
     res.cookie("access_token", data.session.access_token, { httpOnly: true });
-    res.json({ success: true, message: "Login realizado com sucesso!" });
+    res.json({ success: true, message: "Login realizado com sucesso!", user: { id: user.id, email: user.email }, needsProfile });
 });
 
 
