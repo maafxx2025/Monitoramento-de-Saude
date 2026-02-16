@@ -27,18 +27,6 @@ body {
 }
 
 .form-input {
-      width: 100%;
-      border-radius: 0.5rem;
-      border-width: 2px;
-      border-color: var(--light-gray, #d1d5db);
-      background-color: var(--white, #fff);
-      padding: 1rem;
-      font-size: 1rem;
-      line-height: 1.5rem;
-      color: rgb(0 0 0 / 1);
-    }
-
-/* .form-input {
     border: 1px solid var(--light-gray-border);
     border-radius: 0.5rem;
     padding: 1rem;
@@ -48,4 +36,4 @@ body {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 2px rgba(50, 100, 166, 0.2);
-} */
+}

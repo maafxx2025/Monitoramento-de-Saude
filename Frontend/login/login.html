@@ -153,7 +153,13 @@
                 if (!result.success) {
                     showError(result.message);
                 } else {
-                    window.location.href = "/Registro/index.html";
+                    localStorage.setItem("user_id", result.user.id); // Salva id no localStore
+
+                    if (result.needsProfile) {
+                        window.location.href = "/RegistroInformacoes/index.html";
+                    } else {
+                        window.location.href = "/TelaInicial/index.html";
+                    }
                 }
             } catch (error) {
                 showError("Network error");

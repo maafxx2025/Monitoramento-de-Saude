@@ -17,11 +17,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "../Frontend")));
 
 // Rotas
-const authRoutes = require("./routes/auth");
-const profileRoutes = require("./routes/profile");
+const authRoutes = require("./routes/auth");// Importa as rotas de autenticação
+const profileRoutes = require("./routes/profile");// Importa as rotas de perfil
+const healthRoutes = require('./routes/sinaisVitais');// Importa as rotas de Sinais Vitais
+const medicationRoutes = require('./routes/medications'); // Importa as rotas de Lembrete de medicações
 
-app.use("/auth", authRoutes);
-app.use("/profile", profileRoutes);
+app.use("/auth", authRoutes);// Usa as rotas de autenticação
+app.use("/profile", profileRoutes);// Usa as rotas de perfil
+app.use('/health', healthRoutes);// Usa as rotas de Sinais Vitais
+app.use('/medications', medicationRoutes);// Usa as rotas de Lembrete de medicações
 
 // Rota para exibir o login.html
 app.get("/", (req, res) => {

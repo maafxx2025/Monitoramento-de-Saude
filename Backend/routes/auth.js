@@ -73,5 +73,26 @@ router.post("/login", async (req, res) => {
     res.json({ success: true, message: "Login realizado com sucesso!", user: { id: user.id, email: user.email }, needsProfile });
 });
 
+// Rota para buscar dados do usuário
+router.get("/user/:id", async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const { data, error } = await supabaseAdmin
+            .from("profiles")
+            .select("*") // Busca todas as colunas
+            .eq("id", id)
+            .single();
+
+        if (error) {
+            return res.status(400).json({ success: false, message: error.message });
+        }
+
+        return res.json({ success: true, user: data });
+    } catch (err) {
+        return res.status(500).json({ success: false, message: "Erro interno do servidor" });
+    }
+});
+
 
 module.exports = router;

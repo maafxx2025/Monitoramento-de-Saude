@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Adicionar Consulta</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .form-input {
+            width: 100%;
+            border-radius: 0.5rem;
+            border-width: 2px;
+            border-color: var(--light-gray, #d1d5db);
+            background-color: var(--white, #fff);
+            padding: 1rem;
+            font-size: 1rem;
+            line-height: 1.5rem;
+            color: rgb(0 0 0 / 1);
+        }
+
+        :root {
+            --primary-blue: #3264a6;
+            --white: #ffffff;
+            --gray: #5a6f8c;
+            --light-gray: #e5e7eb;
+            --green: #28a745;
+        }
+
+        body {
+            font-family: 'Noto Sans', sans-serif;
+        }
+
+        .form-input {
+            @apply w-full rounded-lg border-2 border-[var(--light-gray)] bg-[var(--white)] p-4 text-base text-black placeholder:text-[var(--gray)] focus:border-[var(--primary-blue)] focus:ring-0;
+        }
+
+        .radio-label {
+            @apply flex cursor-pointer items-center gap-3 rounded-lg border-2 border-[var(--light-gray)] p-4 transition-colors;
+        }
+
+        .radio-label:has(input:checked) {
+            @apply border-[var(--primary-blue)] bg-blue-50;
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <div class="max-w-sm mx-auto min-h-screen flex flex-col">
+        <header class="header fixed top-0 left-0 right-0 max-w-sm mx-auto flex items-center justify-between p-4 z-10">
+            <a href="../TelaInicial/index.html">
+                <button class="text-white">
+                    <span class="material-icons">arrow_back_ios_new</span>
+                </button>
+            </a>
+
+            <h1 class="text-xl font-bold">Adicionar Consulta</h1>
+            <div class="w-8"></div>
+        </header>
+
+        <main class="flex-grow pt-20 px-4 pb-4">
+            <form id="appointment-form" class="space-y-6">
+
+                <!-- Tipo de consulta -->
+                <div>
+                    <label class="block text-sm font-medium mb-1" for="consultation-type">Tipo de consulta</label>
+                    <select id="consultation-type" name="consultation-type" class="form-input">
+                        <option value="cardiologista">Cardiologista</option>
+                        <option value="dentista">Dentista</option>
+                        <option value="obstetra">Obstetra</option>
+                        <option value="clinico-geral">Clínico Geral</option>
+                        <option value="dermatologista">Dermatologista</option>
+                        <option value="oftalmologista">Oftalmologista</option>
+                        <option value="ortopedista">Ortopedista</option>
+                        <option value="pediatra">Pediatra</option>
+                        <option value="psiquiatra">Psiquiatra</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                </div>
+
+                <!-- Nome do médico (opcional) -->
+                <div>
+                    <label class="block text-sm font-medium mb-1" for="doctor-name">Nome do(a) doutor(a)
+                        (opcional)</label>
+                    <input class="form-input" id="doctor-name" name="doctor-name" placeholder="Ex: Dr. João Silva"
+                        type="text" />
+                </div>
+
+                <!-- Data -->
+                <div>
+                    <label class="block text-sm font-medium mb-1" for="appointment-date">Data da consulta</label>
+                    <input class="form-input" id="appointment-date" name="appointment-date" type="date" />
+                </div>
+
+                <!-- Horário -->
+                <div>
+                    <label class="block text-sm font-medium mb-1" for="appointment-time">Horário da consulta</label>
+                    <input class="form-input" id="appointment-time" name="appointment-time" type="time" />
+                </div>
+
+                <!-- Descrição -->
+                <div>
+                    <label class="block text-sm font-medium mb-1" for="description">Observações (opcional)</label>
+                    <textarea class="form-input" id="description" name="description"
+                        placeholder="Ex: Levar exames anteriores." rows="4"></textarea>
+                </div>
+
+                <!-- Botão -->
+                <div class="fixed bottom-0 left-0 right-0 p-4 bg-white max-w-sm mx-auto">
+                    <button id="save-button" type="submit"
+                        class="w-full rounded-lg bg-[var(--green)] py-4 text-center text-lg font-bold text-[var(--white-color)] hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
+                        Salvar Consulta
+                    </button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <!-- Toast de sucesso -->
+    <div id="success-toast"
+        class="hidden fixed top-1/3 left-1/2 -translate-x-1/2 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg flex items-center gap-3 z-50 opacity-0 scale-95 transition-all duration-200"
+        role="status" aria-hidden="true" aria-live="polite">
+        <span class="material-icons">check_circle</span>
+        <span>Consulta salva!</span>
+    </div>
+
+    <!-- Toast de erro -->
+    <div id="error-toast"
+        class="hidden fixed top-1/3 left-1/2 -translate-x-1/2 bg-red-500 text-white px-6 py-4 rounded-lg shadow-lg flex items-center gap-3 z-50 opacity-0 scale-95 transition-all duration-200"
+        role="alert" aria-hidden="true" aria-live="assertive">
+        <span class="material-icons">error</span>
+        <span>Preencha todos os campos obrigatórios.</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

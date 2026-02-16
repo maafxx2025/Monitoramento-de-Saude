@@ -11,26 +11,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&amp;display=swap"
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
     <style type="text/tailwindcss">
         :root {
-        --primary-blue: #3264a6;
-        --white: #ffffff;
-        --gray: #5a6f8c;
-        --light-gray: #e5e7eb;
-        --green: #28a745;
-      }
-      body {
-        font-family: 'Noto Sans', sans-serif;
-      }
-      .form-input {
-        @apply w-full rounded-lg border-2 border-[var(--light-gray)] bg-[var(--white)] p-4 text-base text-black placeholder:text-[var(--gray)] focus:border-[var(--primary-blue)] focus:ring-0;
-      }
-      .radio-label {
-        @apply flex cursor-pointer items-center gap-3 rounded-lg border-2 border-[var(--light-gray)] p-4 transition-colors;
-      }
-      .radio-label:has(input:checked) {
-        @apply border-[var(--primary-blue)] bg-blue-50;
-      }
+  --primary-blue: #3264a6;
+  --white: #ffffff;
+  --gray: #5a6f8c;
+  --light-gray: #e5e7eb;
+  --green: #28a745;
+}
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.form-input {
+  @apply w-full rounded-lg border-2 border-[var(--light-gray)] bg-[var(--white)] p-4 text-base text-black placeholder:text-[var(--gray)] focus:border-[var(--primary-blue)] focus:ring-0;
+}
+
+.radio-label {
+  @apply flex cursor-pointer items-center gap-3 rounded-lg border-2 border-[var(--light-gray)] p-4 transition-colors;
+}
+
+.radio-label:has(input:checked) {
+  @apply border-[var(--primary-blue)] bg-blue-50;
+}
     </style>
 </head>
 
@@ -38,16 +43,19 @@
     <div class="flex h-screen flex-col">
         <header class="fixed top-0 z-10 w-full bg-[var(--primary-blue)] text-[var(--white)] shadow-md">
             <div class="container mx-auto flex h-16 max-w-md items-center justify-between px-4">
-                <button class="text-white">
-                    <span class="material-icons">arrow_back</span>
-                </button>
+                <a href="../TelaInicial/index.html">
+                    <button class="text-white">
+                        <span class="material-icons">arrow_back</span>
+                    </button>
+                </a>
+
                 <h1 class="text-xl font-bold">Registrar Glicemia</h1>
                 <div class="w-6"></div>
             </div>
         </header>
         <main class="flex-1 overflow-y-auto bg-white pt-16">
             <div class="container mx-auto max-w-md p-6">
-                <form class="space-y-6">
+                <form id="glucose-form" class="space-y-6">
                     <div>
                         <label class="mb-2 block text-base font-medium text-[var(--gray)]" for="glycemia-value">Valor da
                             Glicemia</label>
@@ -55,7 +63,7 @@
                             <input class="form-input pr-16" id="glycemia-value" name="glycemia-value"
                                 placeholder="Ex: 110" type="number" />
                             <span
-                                class="absolute inset-y-0 right-0 flex items-center pr-4 text-base text-[var(--gray)]">mg/dL</span>
+                                class="absolute inset-y-0 right-8 flex items-center pr-4 text-base text-[var(--gray)]">mg/dL</span>
                         </div>
                     </div>
                     <div>
@@ -63,15 +71,15 @@
                             <legend class="mb-2 block text-base font-medium text-[var(--gray)]">Data da Medição</legend>
                             <div class="space-y-3">
                                 <label class="radio-label" for="today">
-                                    <input checked=""
+                                    <input checked
                                         class="h-5 w-5 border-[var(--gray)] text-[var(--primary-blue)] focus:ring-[var(--primary-blue)]"
-                                        id="today" name="measurement-date" type="radio" />
+                                        id="today" name="measurement-date" type="radio" value="today" />
                                     <span>Hoje</span>
                                 </label>
                                 <label class="radio-label" for="other-date-radio">
                                     <input
                                         class="h-5 w-5 border-[var(--gray)] text-[var(--primary-blue)] focus:ring-[var(--primary-blue)]"
-                                        id="other-date-radio" name="measurement-date" type="radio" />
+                                        id="other-date-radio" name="measurement-date" type="radio" value="other" />
                                     <span>Outra data</span>
                                 </label>
                             </div>
@@ -93,30 +101,14 @@
         </main>
         <footer class="sticky bottom-0 w-full border-t border-[var(--light-gray)] bg-white p-4">
             <div class="container mx-auto max-w-md">
-                <button
+                <button id="save-button" type="button"
                     class="w-full rounded-lg bg-[var(--green)] py-4 text-center text-lg font-bold text-[var(--white)] hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
                     Salvar Registro
                 </button>
             </div>
         </footer>
     </div>
-    <script>
-        const todayRadio = document.getElementById('today');
-        const otherDateRadio = document.getElementById('other-date-radio');
-        const datePickerContainer = document.getElementById('date-picker-container');
-        function toggleDatePicker() {
-            if (otherDateRadio.checked) {
-                datePickerContainer.classList.remove('hidden');
-            } else {
-                datePickerContainer.classList.add('hidden');
-            }
-        }
-        todayRadio.addEventListener('change', toggleDatePicker);
-        otherDateRadio.addEventListener('change', toggleDatePicker);
-        // Call on load to set initial state
-        toggleDatePicker();
-    </script>
-
+    <script src="glicemia.js"></script>
 </body>
 
 </html>

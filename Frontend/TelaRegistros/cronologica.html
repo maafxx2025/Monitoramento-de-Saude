@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Calendário de Saúde - HealthApp</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style type="text/tailwindcss">
+        :root {
+            --primary-color: #3264A6;
+            --white-color: #FFFFFF;
+            --gray-color: #5A6F8C;
+            --green-color: #28A745;
+            --light-gray-bg: #F8F9FA;
+            --text-color: #333333;
+        }
+        body {
+            font-family: 'Public Sans', sans-serif;
+            background-color: var(--light-gray-bg);
+        }
+        .header {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+        .tab.active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        .tab {
+            color: var(--gray-color);
+        }
+        .card {
+            background-color: var(--white-color);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .btn-icon {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--gray-color);
+        }
+        .btn-confirm {
+            background-color: var(--green-color);
+            color: var(--white-color);
+        }
+        .fab {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+    </style>
+</head>
+
+<body class="bg-[var(--light-gray-bg)]">
+    <div class="flex flex-col min-h-screen">
+        <header class="header fixed top-0 left-0 right-0 z-10 flex items-center justify-between px-4 py-3 shadow-md">
+            <button class="btn-icon">
+                <span class="material-symbols-outlined">
+                    arrow_back_ios
+                </span>
+            </button>
+            <h1 class="text-xl font-bold">Calendário de Saúde</h1>
+            <div class="w-8"></div>
+        </header>
+        <main class="flex-grow mt-16">
+            <div class="sticky top-16 bg-[var(--light-gray-bg)] z-10 shadow-sm">
+                <div class="flex justify-center border-b border-gray-200">
+                    <button class="tab flex-1 py-3 text-center text-sm font-medium">
+                        <span class="material-symbols-outlined align-middle mr-1"
+                            style="font-size: 1.2rem;">calendar_month</span>
+                        Calendário
+                    </button>
+                    <button class="tab active flex-1 py-3 text-center text-sm font-medium border-b-2">
+                        <span class="material-symbols-outlined align-middle mr-1"
+                            style="font-size: 1.2rem;">list_alt</span>
+                        Lista Cronológica
+                    </button>
+                </div>
+            </div>
+            <div class="p-4 space-y-6">
+                <div>
+                    <h2 class="text-lg font-bold text-[var(--gray-color)] px-2 mb-3">📍 Hoje</h2>
+                    <div class="space-y-4">
+                        <!-- Consulta -->
+                        <div class="card border-l-4 border-[var(--primary-color)] p-4 space-y-3">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <p class="text-sm text-[var(--gray-color)]">10:00</p>
+                                    <p class="text-lg font-bold text-[var(--text-color)]">Cardiologista</p>
+                                    <p class="text-sm text-[var(--gray-color)]">Dr. Silva / Clinica bem estar</p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <!-- Confirmar -->
+                                    <button class="btn-icon p-2 hover:bg-gray-100 rounded-full text-gray-400"
+                                        onclick="this.classList.toggle('text-green-500')">
+                                        <span class="material-symbols-outlined">check_circle</span>
+                                    </button>
+                                    <button class="btn-icon p-2 hover:bg-gray-100 rounded-full">
+                                        <span class="material-symbols-outlined">edit</span>
+                                    </button>
+                                    <button class="btn-icon p-2 hover:bg-gray-100 rounded-full">
+                                        <span class="material-symbols-outlined">delete</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Medicamento -->
+                        <div class="card border-l-4 border-[var(--green-color)] p-4 space-y-3">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <p class="text-sm text-[var(--gray-color)]">14:00</p>
+                                    <p class="text-lg font-bold text-[var(--text-color)]">Dipirona</p>
+                                    <p class="text-sm text-[var(--gray-color)]">2 comprimidos</p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <!-- Confirmar -->
+                                    <button class="btn-icon p-2 hover:bg-gray-100 rounded-full text-gray-400"
+                                        onclick="this.classList.toggle('text-green-500')">
+                                        <span class="material-symbols-outlined">check_circle</span>
+                                    </button>
+                                    <button class="btn-icon p-2 hover:bg-gray-100 rounded-full">
+                                        <span class="material-symbols-outlined">edit</span>
+                                    </button>
+                                    <button class="btn-icon p-2 hover:bg-gray-100 rounded-full">
+                                        <span class="material-symbols-outlined">delete</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-lg font-bold text-[var(--gray-color)] px-2 mb-3">📍 Amanhã</h2>
+                    <div class="space-y-4">
+                        <!-- Consulta -->
+                        <div class="card border-l-4 border-[var(--primary-color)] p-4 space-y-3">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <p class="text-sm text-[var(--gray-color)]">08:00</p>
+                                    <p class="text-lg font-bold text-[var(--text-color)]">Dentista</p>
+                                    <p class="text-sm text-[var(--gray-color)]">Posto de Saúde</p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <!-- Confirmar -->
+                                    <button class="btn-icon p-2 hover:bg-gray-100 rounded-full text-gray-400"
+                                        onclick="this.classList.toggle('text-green-500')">
+                                        <span class="material-symbols-outlined">check_circle</span>
+                                    </button>
+                                    <button class="btn-icon p-2 hover:bg-gray-100 rounded-full">
+                                        <span class="material-symbols-outlined">edit</span>
+                                    </button>
+                                    <button class="btn-icon p-2 hover:bg-gray-100 rounded-full">
+                                        <span class="material-symbols-outlined">delete</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Medicamento -->
+                        <div class="card border-l-4 border-[var(--green-color)] p-4 space-y-3">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <p class="text-sm text-[var(--gray-color)]">17:00</p>
+                                    <p class="text-lg font-bold text-[var(--text-color)]">Sertralina</p>
+                                    <p class="text-sm text-[var(--gray-color)]">1 coprimido</p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <!-- Confirmar -->
+                                    <button class="btn-icon p-2 hover:bg-gray-100 rounded-full text-gray-400"
+                                        onclick="this.classList.toggle('text-green-500')">
+                                        <span class="material-symbols-outlined">check_circle</span>
+                                    </button>
+                                    <button class="btn-icon p-2 hover:bg-gray-100 rounded-full">
+                                        <span class="material-symbols-outlined">edit</span>
+                                    </button>
+                                    <button class="btn-icon p-2 hover:bg-gray-100 rounded-full">
+                                        <span class="material-symbols-outlined">delete</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <button
+            class="mb-10 fab fixed bottom-6 right-6 w-14 h-14 flex items-center justify-center rounded-full shadow-lg z-20">
+            <span class="material-symbols-outlined" style="font-size: 2rem;">add</span>
+        </button>
+        <div class="sticky bottom-0 left-0 right-0 z-10 bg-[var(--light-gray)]">
+            <div class="relative mx-auto max-w-lg">
+                <nav
+                    class="flex h-20 items-center justify-around rounded-t-2xl border-t border-gray-200 bg-[var(--secondary-color)] shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+                    <a class="flex flex-col items-center gap-1 text-[var(--dark-gray)]"
+                        href="../TelaInicial/index.html">
+                        <div data-icon="House" data-size="28px" data-weight="fill">
+                            <svg fill="currentColor" height="28px" viewBox="0 0 256 256" width="28px"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M224,115.55V208a16,16,0,0,1-16,16H168a16,16,0,0,1-16-16V168a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v40a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V115.55a16,16,0,0,1,5.17-11.78l80-75.48.11-.11a16,16,0,0,1,21.53,0,1.14,1.14,0,0,0,.11.11l80,75.48A16,16,0,0,1,224,115.55Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <p class="text-xs font-bold">Início</p>
+                    </a>
+                    <a class="flex flex-col items-center gap-1 text-[var(--primary-color)] font-bold"
+                        href="acompanhamento.html">
+                        <div data-icon="Heart" data-size="28px" data-weight="regular">
+                            <svg fill="currentColor" height="28px" viewBox="0 0 256 256" width="28px"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M178,32c-20.65,0-38.73,8.88-50,23.89C116.73,40.88,98.65,32,78,32A62.07,62.07,0,0,0,16,94c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,220.66,240,164,240,94A62.07,62.07,0,0,0,178,32ZM128,206.8C109.74,196.16,32,147.69,32,94A46.06,46.06,0,0,1,78,48c19.45,0,35.78,10.36,42.6,27a8,8,0,0,0,14.8,0c6.82-16.67,23.15-27,42.6-27a46.06,46.06,0,0,1,46,46C224,147.61,146.24,196.15,128,206.8Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <p class="text-xs font-medium">Saúde</p>
+                    </a>
+                    <a class="flex flex-col items-center gap-1 text-[var(--dark-gray)]" href="#">
+                        <div data-icon="Note" data-size="28px" data-weight="regular">
+                            <svg fill="currentColor" height="28px" viewBox="0 0 256 256" width="28px"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M88,96a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H96A8,8,0,0,1,88,96Zm8,40h64a8,8,0,0,0,0-16H96a8,8,0,0,0,0,16Zm32,16H96a8,8,0,0,0,0,16h32a8,8,0,0,0,0-16ZM224,48V156.69A15.86,15.86,0,0,1,219.31,168L168,219.31A15.86,15.86,0,0,1,156.69,224H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32H208A16,16,0,0,1,224,48ZM48,208H152V160a8,8,0,0,1,8-8h48V48H48Zm120-40v28.7L196.69,168Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <p class="text-xs font-medium">Registros</p>
+                    </a>
+                    <a class="flex flex-col items-center gap-1 text-[var(--dark-gray)]" href="#">
+                        <div data-icon="User" data-size="28px" data-weight="regular">
+                            <svg fill="currentColor" height="28px" viewBox="0 0 256 256" width="28px"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <p class="text-xs font-medium">Perfil</p>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

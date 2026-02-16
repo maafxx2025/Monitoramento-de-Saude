@@ -19,8 +19,8 @@
             <h1 class="text-xl font-bold">Cadastro</h1>
             <span class="material-icons">more_vert</span>
         </header>
-        <main class="p-4 flex-grow">
-            <form class="space-y-6" id="signupForm"> <!--action="#" -->
+        <main class="p-4 flex-grow flex flex-col">
+            <form class="space-y-6" id="signupForm">
                 <div>
                     <label class="sr-only" for="name">Nome</label>
                     <input
@@ -50,40 +50,40 @@
                     <input
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
                         id="emergency_phone" placeholder="Telefone de emergência" type="tel" required />
-                    <!-- <span
-                        class="material-icons absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">chevron_right</span> -->
                 </div>
 
                 <!-- Mensagem de erro/sucesso -->
                 <div id="messageBox" class="hidden px-4 py-3 rounded text-center text-sm font-medium"></div>
-                <!-- Botão de enviar -->
-                <button type="submit" class="w-full bg-blue-700 text-white font-bold py-3 rounded-lg hover:bg-blue-800">
+
+            </form>
+            <!-- Div que segura os botões lá embaixo -->
+            <div class="mt-auto space-y-4">
+                <button type="submit" form="signupForm"
+                    class="w-full bg-blue-700 text-white font-bold py-3 rounded-lg hover:bg-blue-800">
                     Cadastrar
                 </button>
-            </form>
+
+                <button
+                    class="w-full bg-red-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-red-700 transition duration-300 flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
+                            fill="#EA4335"></path>
+                        <path
+                            d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v8.51h13.04c-.57 3.2-2.31 5.92-4.94 7.72l7.98 6.19c4.63-4.26 7.3-10.42 7.3-17.87z"
+                            fill="#4285F4"></path>
+                        <path
+                            d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24s.92 7.54 2.56 10.78l7.97-6.19z"
+                            fill="#FBBC05"></path>
+                        <path
+                            d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.98-6.19c-2.11 1.42-4.81 2.27-7.91 2.27-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
+                            fill="#34A853"></path>
+                        <path d="M0 0h48v48H0z" fill="none"></path>
+                    </svg>
+                    Cadastrar com o Google
+                </button>
+            </div>
         </main>
-        <footer class="p-4 space-y-4 bg-white">
-            <button class="w-full bg-blue-700 text-white font-bold py-3 rounded-lg hover:bg-blue-800">Cadastrar</button>
-            <button
-                class="w-full bg-red-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-red-700 transition duration-300 flex items-center justify-center">
-                <svg class="w-5 h-5 mr-2" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
-                        fill="#EA4335"></path>
-                    <path
-                        d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v8.51h13.04c-.57 3.2-2.31 5.92-4.94 7.72l7.98 6.19c4.63-4.26 7.3-10.42 7.3-17.87z"
-                        fill="#4285F4"></path>
-                    <path
-                        d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24s.92 7.54 2.56 10.78l7.97-6.19z"
-                        fill="#FBBC05"></path>
-                    <path
-                        d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.98-6.19c-2.11 1.42-4.81 2.27-7.91 2.27-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
-                        fill="#34A853"></path>
-                    <path d="M0 0h48v48H0z" fill="none"></path>
-                </svg>
-                Entrar com o Google
-            </button>
-        </footer>
     </div>
 
     <script>

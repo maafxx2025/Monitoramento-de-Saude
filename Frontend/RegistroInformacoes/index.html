@@ -35,8 +35,8 @@
 <body class="bg-[var(--light-gray)]">
     <div class="container mx-auto max-w-2xl px-4 py-8">
         <header class="mb-8 text-center">
-            <h1 class="text-4xl font-bold text-[var(--brand-blue)]">Vamos começar a te conhecer melhor!</h1>
-            <p class="mt-2 text-lg text-[var(--dark-gray)]">Nome do Usuário</p>
+            <h1 class="text-4xl font-bold text-[var(--brand-blue)]">Vamos começar a te conhecer melhor</h1>
+            <p id="userName" class="mt-2 text-lg text-[var(--dark-gray)]">Carregando...</p>
         </header>
         <main class="rounded-xl bg-[var(--brand-white)] p-6 shadow-lg md:p-10">
             <form action="#" method="POST">
@@ -95,6 +95,7 @@
                                 <option value="problemas_respiratorios">Doenças Respiratórias Crônicas</option>
                                 <option value="alzheimer">Alzheimer</option>
                                 <option value="outros">Outros</option>
+                                <option value="outros">Não tenho Doenças</option>
                             </select>
                         </div>
                     </div>
@@ -105,6 +106,18 @@
             </form>
         </main>
     </div>
+
+    <!-- Overlay para embaçar fundo -->
+    <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40"></div>
+
+    <!-- Caixa de mensagem -->
+    <div id="messageBox" class="hidden fixed inset-0 flex items-center justify-center z-50">
+        <div
+            class="max-w-sm w-11/12 sm:w-auto bg-[#3264A6] text-white font-semibold px-6 py-4 rounded-lg shadow-lg text-center break-words">
+            <p id="messageText"></p>
+        </div>
+    </div>
+
     <!-- Choices.js JS -->
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     <script src="script.js"></script>

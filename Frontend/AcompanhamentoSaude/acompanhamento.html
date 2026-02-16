@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Acompanhamento de Saúde</title>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
+    <link as="style"
+        href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+        onload="this.rel='stylesheet'" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Importando Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style type="text/tailwindcss">
+        :root {
+        --light-gray: #F0F2F5;
+        --primary-color: #2266b9;
+        --secondary-color: #ffffff;
+        
+        --text-primary: #0f141a;
+        --text-secondary: #537093;
+        --warning-bg: #fefce8;
+        --warning-text: #a16207;
+        --danger-bg: #fee2e2;
+        --danger-text: #b91c1c;
+        --success-color: #16a34a;
+      }
+      body {
+        font-family: 'Inter', 'Noto Sans', sans-serif;
+        background-color: var(--secondary-color);
+      }
+      .metric-tab.active {
+        border-bottom-color: var(--primary-color);
+        color: var(--text-primary);
+      }
+      .period-filter-btn.active {
+        background-color: var(--primary-color);
+        color: white;
+      }
+    </style>
+</head>
+
+<body class="bg-white">
+    <div class="flex min-h-screen flex-col">
+        <header
+            class="sticky top-0 z-10 flex w-full items-center justify-center bg-blue-600 px-4 py-3 text-white shadow-md sm:px-6">
+            <!-- <a href="../TelaInicial/index.html">
+                <button class="flex items-center gap-2">
+                    <span class="material-symbols-outlined"> arrow_back_ios_new </span>
+                </button>
+            </a> -->
+            <h1 class="text-xl font-bold">Saúde</h1>
+            <div class="size-6"></div>
+        </header>
+        <main class="flex-grow p-4 sm:p-6">
+            <div class="mx-auto max-w-4xl">
+
+                <div class="mb-6 flex flex-wrap items-center justify-center gap-2">
+                    <button class="period-filter-btn active rounded-full px-4 py-2 text-sm">7 dias</button>
+                    <button
+                        class="period-filter-btn rounded-full bg-gray-100 px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">1
+                        mês</button>
+                    <button
+                        class="period-filter-btn rounded-full bg-gray-100 px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">3
+                        meses</button>
+                    <button
+                        class="period-filter-btn rounded-full bg-gray-100 px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">6
+                        meses</button>
+                    <button
+                        class="period-filter-btn rounded-full bg-gray-100 px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">1
+                        ano</button>
+                    <button
+                        class="period-filter-btn rounded-full bg-gray-100 px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Todos</button>
+                </div>
+
+                <!-- 📊 GRÁFICO INTERATIVO -->
+                <div class="mb-8 rounded-lg border border-gray-200 bg-white py-4 shadow-sm">
+                    <h2 class="mb-4 mx-4 text-lg font-semibold text-gray-800">Evolução dos Registros</h2>
+                    <div class="px-2">
+                        <div class="h-72 sm:h-96 w-full">
+                            <canvas id="healthChart" class="w-full"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                    <div class="rounded-lg border border-gray-200 bg-white p-4 text-center shadow-sm">
+                        <p class="text-sm text-gray-500">Média Semanal</p>
+                        <p class="text-2xl font-bold text-gray-800">105 mg/dL</p>
+                    </div>
+                    <div class="rounded-lg border border-gray-200 bg-white p-4 text-center shadow-sm">
+                        <p class="text-sm text-gray-500">Maior Valor</p>
+                        <p class="text-2xl font-bold text-gray-800">120 mg/dL</p>
+                    </div>
+                    <div class="rounded-lg border border-gray-200 bg-white p-4 text-center shadow-sm">
+                        <p class="text-sm text-gray-500">Menor Valor</p>
+                        <p class="text-2xl font-bold text-gray-800">90 mg/dL</p>
+                    </div>
+                </div> -->
+                <!-- Resumo da Glicemia -->
+                <h3 class="mb-2 text-base font-semibold text-gray-700">Glicemia</h3>
+                <div class="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                    <div class="rounded-lg border border-gray-200 bg-white p-4 text-center shadow-sm">
+                        <p class="text-sm text-gray-500">Média Semanal</p>
+                        <p class="text-2xl font-bold text-gray-800">105 mg/dL</p>
+                    </div>
+                    <div class="rounded-lg border border-gray-200 bg-white p-4 text-center shadow-sm">
+                        <p class="text-sm text-gray-500">Maior Valor</p>
+                        <p class="text-2xl font-bold text-gray-800">120 mg/dL</p>
+                    </div>
+                    <div class="rounded-lg border border-gray-200 bg-white p-4 text-center shadow-sm">
+                        <p class="text-sm text-gray-500">Menor Valor</p>
+                        <p class="text-2xl font-bold text-gray-800">90 mg/dL</p>
+                    </div>
+                </div>
+
+                <!-- Resumo da Pressão Arterial -->
+                <h3 class="mb-2 text-base font-semibold text-gray-700">Pressão Arterial</h3>
+                <div class="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                    <div class="rounded-lg border border-gray-200 bg-white p-4 text-center shadow-sm">
+                        <p class="text-sm text-gray-500">Média Semanal</p>
+                        <p class="text-2xl font-bold text-gray-800">118/78 mmHg</p>
+                    </div>
+                    <div class="rounded-lg border border-gray-200 bg-white p-4 text-center shadow-sm">
+                        <p class="text-sm text-gray-500">Maior Valor</p>
+                        <p class="text-2xl font-bold text-gray-800">125/85 mmHg</p>
+                    </div>
+                    <div class="rounded-lg border border-gray-200 bg-white p-4 text-center shadow-sm">
+                        <p class="text-sm text-gray-500">Menor Valor</p>
+                        <p class="text-2xl font-bold text-gray-800">115/75 mmHg</p>
+                    </div>
+                </div>
+
+                <div class="mb-8 space-y-4">
+                    <div class="flex items-start gap-4 rounded-lg bg-yellow-50 p-4 ring-1 ring-inset ring-yellow-200">
+                        <span class="material-symbols-outlined text-yellow-500"> warning </span>
+                        <div>
+                            <h3 class="font-semibold text-yellow-800">Alerta de Saúde: Atenção</h3>
+                            <p class="text-sm text-yellow-700">Sua glicose esteve levemente alta em 23 de julho.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 rounded-lg bg-red-50 p-4 ring-1 ring-inset ring-red-200">
+                        <span class="material-symbols-outlined text-red-500"> dangerous </span>
+                        <div>
+                            <h3 class="font-semibold text-red-800">Alerta de Saúde: Risco</h3>
+                            <p class="text-sm text-red-700">Sua pressão arterial em 23 de julho esteve
+                                significativamente alta. Por favor, monitore e consulte seu médico.</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="mb-4 text-lg font-semibold text-gray-800">Últimos 5 Registros</h3>
+                    <div class="flow-root">
+                        <ul class="-mb-8" role="list">
+                            <li>
+                                <div class="relative pb-8">
+                                    <span aria-hidden="true"
+                                        class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200"></span>
+                                    <div class="relative flex items-start space-x-3">
+                                        <div>
+                                            <div class="relative px-1">
+                                                <div
+                                                    class="flex size-8 items-center justify-center rounded-full bg-gray-100 ring-8 ring-white">
+                                                    <span class="material-symbols-outlined text-gray-500"> event_note
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="min-w-0 flex-1 py-1.5">
+                                            <div class="text-sm text-gray-500">
+                                                <span class="font-medium text-gray-900">26 de julho de 2024</span>
+                                            </div>
+                                            <div class="mt-2 text-sm text-gray-700">Glicose: 115 mg/dL, PA: 120/80 mmHg
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="relative pb-8">
+                                    <span aria-hidden="true"
+                                        class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200"></span>
+                                    <div class="relative flex items-start space-x-3">
+                                        <div>
+                                            <div class="relative px-1">
+                                                <div
+                                                    class="flex size-8 items-center justify-center rounded-full bg-gray-100 ring-8 ring-white">
+                                                    <span class="material-symbols-outlined text-gray-500"> event_note
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="min-w-0 flex-1 py-1.5">
+                                            <div class="text-sm text-gray-500">
+                                                <span class="font-medium text-gray-900">25 de julho de 2024</span>
+                                            </div>
+                                            <div class="mt-2 text-sm text-gray-700">Glicose: 110 mg/dL, PA: 122/82 mmHg
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="relative pb-8">
+                                    <span aria-hidden="true"
+                                        class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200"></span>
+                                    <div class="relative flex items-start space-x-3">
+                                        <div>
+                                            <div class="relative px-1">
+                                                <div
+                                                    class="flex size-8 items-center justify-center rounded-full bg-yellow-100 ring-8 ring-white">
+                                                    <span class="material-symbols-outlined text-yellow-500"> warning
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="min-w-0 flex-1 py-1.5">
+                                            <div class="text-sm text-gray-500">
+                                                <span class="font-medium text-gray-900">24 de julho de 2024</span>
+                                            </div>
+                                            <div class="mt-2 text-sm text-gray-700">Glicose: <span
+                                                    class="font-bold text-yellow-700">120 mg/dL</span>, PA: 118/78 mmHg
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="relative pb-8">
+                                    <span aria-hidden="true"
+                                        class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200"></span>
+                                    <div class="relative flex items-start space-x-3">
+                                        <div>
+                                            <div class="relative px-1">
+                                                <div
+                                                    class="flex size-8 items-center justify-center rounded-full bg-red-100 ring-8 ring-white">
+                                                    <span class="material-symbols-outlined text-red-500"> dangerous
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="min-w-0 flex-1 py-1.5">
+                                            <div class="text-sm text-gray-500">
+                                                <span class="font-medium text-gray-900">23 de julho de 2024</span>
+                                            </div>
+                                            <div class="mt-2 text-sm text-gray-700">Glicose: 105 mg/dL, PA: <span
+                                                    class="font-bold text-red-700">125/85 mmHg</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="relative">
+                                    <div class="relative flex items-start space-x-3">
+                                        <div>
+                                            <div class="relative px-1">
+                                                <div
+                                                    class="flex size-8 items-center justify-center rounded-full bg-gray-100 ring-8 ring-white">
+                                                    <span class="material-symbols-outlined text-gray-500"> event_note
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="min-w-0 flex-1 py-1.5">
+                                            <div class="text-sm text-gray-500">
+                                                <span class="font-medium text-gray-900">22 de julho de 2024</span>
+                                            </div>
+                                            <div class="mt-2 text-sm text-gray-700">Glicose: 90 mg/dL, PA: 115/75 mmHg
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- Botão com espaçamentos -->
+        <div class="mx-auto max-w-4xl mt-6 mb-20">
+            <button
+                class="w-full rounded-lg bg-green-600 px-5 py-3 text-base font-semibold text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
+                Exportar Relatório
+            </button>
+        </div>
+        <div class="sticky bottom-0 left-0 right-0 z-10 bg-[var(--light-gray)]">
+            <div class="relative mx-auto max-w-lg">
+                <nav
+                    class="flex h-20 items-center justify-around rounded-t-2xl border-t border-gray-200 bg-[var(--secondary-color)] shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+                    <a class="flex flex-col items-center gap-1 text-[var(--dark-gray)]"
+                        href="../TelaInicial/index.html">
+                        <div data-icon="House" data-size="28px" data-weight="fill">
+                            <svg fill="currentColor" height="28px" viewBox="0 0 256 256" width="28px"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M224,115.55V208a16,16,0,0,1-16,16H168a16,16,0,0,1-16-16V168a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v40a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V115.55a16,16,0,0,1,5.17-11.78l80-75.48.11-.11a16,16,0,0,1,21.53,0,1.14,1.14,0,0,0,.11.11l80,75.48A16,16,0,0,1,224,115.55Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <p class="text-xs font-bold">Início</p>
+                    </a>
+                    <a class="flex flex-col items-center gap-1 text-[var(--primary-color)] font-bold"
+                        href="acompanhamento.html">
+                        <div data-icon="Heart" data-size="28px" data-weight="regular">
+                            <svg fill="currentColor" height="28px" viewBox="0 0 256 256" width="28px"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M178,32c-20.65,0-38.73,8.88-50,23.89C116.73,40.88,98.65,32,78,32A62.07,62.07,0,0,0,16,94c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,220.66,240,164,240,94A62.07,62.07,0,0,0,178,32ZM128,206.8C109.74,196.16,32,147.69,32,94A46.06,46.06,0,0,1,78,48c19.45,0,35.78,10.36,42.6,27a8,8,0,0,0,14.8,0c6.82-16.67,23.15-27,42.6-27a46.06,46.06,0,0,1,46,46C224,147.61,146.24,196.15,128,206.8Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <p class="text-xs font-medium">Saúde</p>
+                    </a>
+                    <a class="flex flex-col items-center gap-1 text-[var(--dark-gray)]" href="#">
+                        <div data-icon="Note" data-size="28px" data-weight="regular">
+                            <svg fill="currentColor" height="28px" viewBox="0 0 256 256" width="28px"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M88,96a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H96A8,8,0,0,1,88,96Zm8,40h64a8,8,0,0,0,0-16H96a8,8,0,0,0,0,16Zm32,16H96a8,8,0,0,0,0,16h32a8,8,0,0,0,0-16ZM224,48V156.69A15.86,15.86,0,0,1,219.31,168L168,219.31A15.86,15.86,0,0,1,156.69,224H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32H208A16,16,0,0,1,224,48ZM48,208H152V160a8,8,0,0,1,8-8h48V48H48Zm120-40v28.7L196.69,168Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <p class="text-xs font-medium">Registros</p>
+                    </a>
+                    <a class="flex flex-col items-center gap-1 text-[var(--dark-gray)]" href="#">
+                        <div data-icon="User" data-size="28px" data-weight="regular">
+                            <svg fill="currentColor" height="28px" viewBox="0 0 256 256" width="28px"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <p class="text-xs font-medium">Perfil</p>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Exemplo de dados fictícios (serão substituídos pelos do Supabase depois)
+        const labels = ["01/09", "02/09", "03/09", "04/09", "05/09", "06/09", "07/09"];
+        const glucoseData = [95, 100, 110, 120, 105, 98, 102];
+        const pressureData = [120, 118, 122, 125, 119, 117, 121];
+
+        const ctx = document.getElementById("healthChart").getContext("2d");
+        const healthChart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: "Glicose (mg/dL)",
+                        data: glucoseData,
+                        borderColor: "#ef4444",
+                        backgroundColor: "rgba(239,68,68,0.2)",
+                        tension: 0.3,
+                        fill: true,
+                        pointRadius: 5,
+                        pointBackgroundColor: "#ef4444"
+                    },
+                    {
+                        label: "Pressão Sistólica (mmHg)",
+                        data: pressureData,
+                        borderColor: "#2266b9",
+                        backgroundColor: "rgba(34,102,185,0.2)",
+                        tension: 0.3,
+                        fill: true,
+                        pointRadius: 5,
+                        pointBackgroundColor: "#2266b9"
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: "bottom",
+                        labels: {
+                            font: { size: 14 }
+                        }
+                    },
+                    tooltip: {
+                        mode: "index",
+                        intersect: false
+                    }
+                },
+                interaction: {
+                    mode: "nearest",
+                    axis: "x",
+                    intersect: false
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: "Dias" }
+                    },
+                    y: {
+                        title: { display: true, text: "Valores" },
+                        beginAtZero: false
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
